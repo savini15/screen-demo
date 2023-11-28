@@ -1,9 +1,9 @@
 <template>
   <!-- 中国地图 渲染县级 三级页面 接受来自市点击的name，渲染不同市json-->
-  <div @click="$router.go(-1)" style="color: #fff; font-size: 20px">返回</div>
-  <div class="tip" v-if="state.cityId === undefined">
+  <!-- <div @click="$router.go(-1)" style="color: #fff; font-size: 20px">返回</div> -->
+  <!-- <div class="tip" v-if="state.cityId === undefined">
     敬请谅解，乡镇数据正在努力更新中...
-  </div>
+  </div> -->
   <!-- echarts的容器 -->
   <div :id="state.id" class="cityCharts"></div>
 </template>
@@ -24,7 +24,6 @@ const route = useRoute();
 import { cityMap } from "../../../public/public/city/china-main-city-map";
 
 let state = reactive({
-  cityId: null,
   id: "echarts_" + new Date().getTime() + Math.floor(Math.random() * 1000),
   myChart: null,
   option: {
@@ -42,7 +41,7 @@ let state = reactive({
     },
     // 提示浮窗样式
     tooltip: {
-      show: true,
+      show: false,
       trigger: "item",
       alwaysShowContent: false,
       backgroundColor: "#0C121C",
@@ -63,7 +62,7 @@ let state = reactive({
 
     visualMap: {
       //分段型视觉映射组件
-      show: true,
+      show: false,
       type: "piecewise",
       left: 50,
       bottom: 50,
@@ -118,7 +117,7 @@ let state = reactive({
     geo: {
       map: "",
       roam: true, //是否开启平游或缩放
-      zoom: 1.2, //当前视角的缩放比例
+      zoom: 1.4, //当前视角的缩放比例
       emphasis: {
         label: {
           color: "#fff",
@@ -167,7 +166,7 @@ let state = reactive({
 
     series: [
       {
-        name: "模拟数据",
+        name: "",
         type: "map",
         geoIndex: 0, // 不可缺少，否则无tooltip 指示效果
         data: [{ name: "", value: "" }],
@@ -187,7 +186,7 @@ onMounted(async () => {
   // 设置地图
   state.option.geo.map = city;
   // 第二种方式通过js文件引入json
-  state.cityId = cityMap[city];
+  state.cityId = 'xian'//cityMap[city];
 
   // console.log(state.cityId);
   // 初始化echarts

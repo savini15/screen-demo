@@ -10,7 +10,8 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: url('@/assets/images/vi.gif') 0 0 /cover no-repeat;
+//    background: url('@/assets/images/loading.gif') 0 0 /cover no-repeat;
+//   background: url('@/assets/images/loading.gif') 0 0 /cover no-repeat;
     z-index: 1;
 }
 </style>

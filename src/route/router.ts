@@ -23,7 +23,7 @@ const routes = [
   {
     // 重定向到china
     path: "/",
-    redirect: "/china",
+    redirect: "/city",
   },
   {
     path: "/",

@@ -1,27 +1,13 @@
 <template>
   <div class="large-screen-view">
-    <!-- 开场动画 -->
-    <my-start v-if="StartFlag" />
-    <!-- 点击跳过按钮 -->
-    <div id="timer" v-if="StartFlag" @click="Skip">
-      <div class="timer-text">跳过</div>
-      <div class="timer-round">
-        <div class="left wrap">
-          <div class="left-radius radius"></div>
-        </div>
-        <div class="right wrap">
-          <div class="right-radius radius"></div>
-        </div>
-      </div>
-    </div>
     <!-- 渲染主页 -->
     <div class="animate__animated" ref="animate">
-      <div class="container-header" v-if="!StartFlag">
+      <div class="container-header" >
         <!-- 时间组件 -->
         <my-time class="my-time" />
-        <h3>数据合规综合态势平台</h3>
+        <h3>公共法律服务数据监控平台</h3>
       </div>
-      <div class="container-content" v-if="!StartFlag">
+      <div class="container-content" >
         <div class="container-left">
           <div class="count-share w2">
             <div class="com-count-title">数据共享次数</div>
@@ -51,7 +37,7 @@
           <my-switch />
         </div>
       </div>
-      <div class="footer-wrap" v-if="!StartFlag">
+      <div class="footer-wrap" >
         <div class="border-container">
           <div class="name-title tile-size-color">数据安全合规</div>
           <my-chart :my-option="chart3Data" />
@@ -74,46 +60,11 @@
 </template>
 
 <script setup lang="ts">
-// echarts
 import * as echarts from "echarts";
-import { CountTo } from "vue3-count-to";
+// import { CountTo } from "vue3-count-to";
 import myChart from "@/components/MyEcharts/index.vue";
 import ScrollTable from "@/components/scrollTable/index.vue";
 
-// 开场动画状态
-const StartFlag = ref<boolean>(true);
-// 4秒后跳过开场动画
-let timer = null;
-let JumpOutTimer = null;
-// 判断是否是第一次进入页面
-if (window.performance.navigation.type !== 1) {
-  StartFlag.value = false;
-  timer = null;
-  JumpOutTimer = null;
-}
-timer = setTimeout(() => {
-  StartFlag.value = false;
-}, 3700);
-// 点击跳过开场动画并清除计时器
-const Skip = () => {
-  Animate().classList.add("active");
-  StartFlag.value = false;
-  clearTimeout(timer);
-  timer = null;
-  clearTimeout(JumpOutTimer);
-  JumpOutTimer = null;
-};
-// 获取页面跳出动画包裹的div
-const animate = ref<HTMLDivElement | null>(null);
-const Animate = () => animate.value as HTMLDivElement;
-// 判断是否是第一次进入页面 没有特效
-JumpOutTimer = setTimeout(() => {
-  if (StartFlag.value) {
-    Animate().classList.add("active");
-  }
-}, 3700);
-
-// let XData = ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月"];
 // 获取1-当前月份的数据
 const date = new Date();
 const month = date.getMonth() + 1;
@@ -829,8 +780,9 @@ const { chartData, chart2Data, chart3Data, chart4Data, chart5Data, chart6Data } 
 
 .large-screen-view {
   padding-bottom: 10px;
-  background: url("@/assets/images/view_bg.png") 0 0 / cover no-repeat;
+  //background: url("@/assets/images/view_bg.png") 0 0 / cover no-repeat;
   min-height: 100vh;
+  background: #1a2158;
 
   //   点击跳过按钮样式
   #timer {
@@ -974,7 +926,8 @@ const { chartData, chart2Data, chart3Data, chart4Data, chart5Data, chart6Data } 
     text-align: center;
     box-sizing: border-box;
     background: url(@/assets/images/pic-2.png) 80px 3px/85.5% 121.5% no-repeat,
-      url(@/assets/images/header_bg_02.png) 0 0/100% 100% no-repeat;
+      // url(@/assets/images/header_bg_02.png) 0 0/100% 100% no-repeat;
+      url() 0 0/100% 100% no-repeat;
 
     .my-time {
       margin-top: 3px;
@@ -983,8 +936,8 @@ const { chartData, chart2Data, chart3Data, chart4Data, chart5Data, chart6Data } 
     h3 {
       line-height: 48px;
       font-size: 20px;
-      color: rgb(255, 255, 255);
-      text-shadow: rgb(255 255 255) 0px 0px 15px;
+      color: rgb(107 208 251);
+     // text-shadow: rgb(255 255 255) 0px 0px 15px;
       font-weight: bold;
       justify-content: center;
       text-align: center;
