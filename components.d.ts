@@ -5,6 +5,8 @@ import '@vue/runtime-core'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    Header: typeof import('./src/components/header/index.vue')['default']
+    ListCard: typeof import('./src/components/listCard/index.vue')['default']
     Loading: typeof import('./src/components/MyLoading/loading.vue')['default']
     MyEarth: typeof import('./src/components/MyEarth/index.vue')['default']
     MyEcharts: typeof import('./src/components/MyEcharts/index.vue')['default']

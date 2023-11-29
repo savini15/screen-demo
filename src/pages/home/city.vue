@@ -79,36 +79,36 @@ let state = reactive({
         {
           lt: 5,
           label: " < 5",
-          color: "#83CBAC",
+          color: "#3749b9",
         },
         {
           gte: 5,
           lte: 10,
           label: "5 - 10",
-          color: "#55BB8A",
+          color: "#3749b9",
         },
         {
           gt: 10,
           lte: 15,
           label: "10 - 15",
-          color: "#20A162",
+          color: "#3749b9",
         },
         {
           gt: 15,
           lte: 20,
           label: "15 - 20",
-          color: "#9ABEFA",
+          color: "#3749b9",
         },
         {
           gt: 20,
           lte: 30,
           label: "20 - 30",
-          color: "#78A9F9",
+          color: "#3749b9",
         },
         {
           gt: 30,
           label: "> 30",
-          color: "#5693F7",
+          color: "#3749b9",
         },
       ],
     },
@@ -117,14 +117,16 @@ let state = reactive({
     geo: {
       map: "",
       roam: true, //是否开启平游或缩放
-      zoom: 1.4, //当前视角的缩放比例
+      zoom: 1.6, //当前视角的缩放比例
       emphasis: {
         label: {
           color: "#fff",
+          backgroundColor:'yellow',
+          padding:5
         },
         // 鼠标放上高亮样式
         itemStyle: {
-          areaColor: "#389BB7",
+          areaColor: "#2297fe",
           borderWidth: 0,
         },
       },
@@ -146,11 +148,11 @@ let state = reactive({
           colorStops: [
             {
               offset: 0,
-              color: "rgba(147, 235, 248, 0)", // 0% 处的颜色
+              color: "#3749b9", // 0% 处的颜色
             },
             {
               offset: 1,
-              color: "rgba(147, 235, 248, .2)", // 100% 处的颜色
+              color: "#3749b9", // 100% 处的颜色
             },
           ],
           globalCoord: false, // 缺省为 false
@@ -219,8 +221,8 @@ onMounted(async () => {
 </script>
 <style>
 .cityCharts {
-  width: 400px;
-  height: 290px;
+  width: 100%;
+  height: 200px;
   margin: 0 auto;
 }
 .tip {

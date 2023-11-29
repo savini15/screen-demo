@@ -1,0 +1,23 @@
+.container-header {
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    box-sizing: border-box;
+    background: url(@/assets/images/pic-2.png) 80px 3px/85.5% 121.5% no-repeat,
+      // url(@/assets/images/header_bg_02.png) 0 0/100% 100% no-repeat;
+      url() 0 0/100% 100% no-repeat;
+      background-color: #1a2158;
+    .my-time {
+      margin-top: 3px;
+    }
+
+    h3 {
+      line-height: 48px;
+      font-size: 20px;
+      color: rgb(107 208 251);
+     // text-shadow: rgb(255 255 255) 0px 0px 15px;
+      font-weight: bold;
+      justify-content: center;
+      text-align: center;
+    }
+  }

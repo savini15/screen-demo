@@ -1,70 +1,60 @@
 <template>
-  <div class="large-screen-view">
-    <!-- 渲染主页 -->
-    <div class="animate__animated" ref="animate">
-      <div class="container-header" >
-        <!-- 时间组件 -->
-        <my-time class="my-time" />
-        <h3>公共法律服务数据监控平台</h3>
-      </div>
-      <div class="container-content" >
-        <div class="container-left">
-          <div class="count-share w2">
-            <div class="com-count-title">数据共享次数</div>
-            <div class="com-screen-content">
-              <my-chart :my-option="chart2Data" style="width: 100%; height: 1.2rem" />
-            </div>
-          </div>
-          <div class="count-share w1">
-            <div class="com-count-title">数据共享监听</div>
-            <div class="com-screen-content">
-              <!-- 自动滚动表格 -->
-              <ScrollTable />
-            </div>
-          </div>
-        </div>
-        <!-- 地图 -->
-        <div class="mid">
+ <div class="content_container">
+  <el-row >
+    <el-col :span="6">
+      <list-card></list-card>
+      <list-card></list-card>
+      <list-card></list-card>
+      <list-card></list-card>
+    </el-col>
+    <el-col :span="12">
+      <h5 class="mb-2">main</h5>
+        <div class="">
           <router-view></router-view>
         </div>
-        <div class="container-right">
-          <div class="count-resource q1">
+        <el-row>
+          <el-col :span="8"> 
+            <div class="">
+              <div class="">1111</div>
+              <my-chart :my-option="chart3Data" />
+             </div>
+          </el-col>
+          <el-col :span="8"> 
+            <div class="">
+              <div class="">222</div>
+              <my-chart :my-option="chart4Data" />
+             </div>
+          </el-col>
+          <el-col :span="8"> 
+            <div class="">
+              <div class="">333</div>
+              <my-chart :my-option="chart5Data" />
+             </div>
+          </el-col>
+        </el-row>
+       
+       
+      
+    </el-col>
+    <el-col :span="6">
+      <div class="count-resource q1">
             <div class="com-screen-content2">
               <!-- 卫星信息传递特效 -->
               <my-earth />
             </div>
           </div>
           <my-switch />
-        </div>
-      </div>
-      <div class="footer-wrap" >
-        <div class="border-container">
-          <div class="name-title tile-size-color">数据安全合规</div>
-          <my-chart :my-option="chart3Data" />
-        </div>
-        <div class="border-container">
-          <div class="name-title tile-size-color">衍生数据控制</div>
-          <my-chart :my-option="chart4Data" />
-        </div>
-        <div class="border-container">
-          <div class="name-title tile-size-color">衍生数据控制</div>
-          <my-chart :my-option="chart5Data" />
-        </div>
-        <div class="border-container">
-          <div class="name-title tile-size-color">数据内容保护</div>
-          <my-chart :my-option="chart6Data" />
-        </div>
-      </div>
-    </div>
-  </div>
+     
+    </el-col>
+  </el-row>
+ </div>
 </template>
 
 <script setup lang="ts">
 import * as echarts from "echarts";
-// import { CountTo } from "vue3-count-to";
 import myChart from "@/components/MyEcharts/index.vue";
 import ScrollTable from "@/components/scrollTable/index.vue";
-
+import './home.scss'
 // 获取1-当前月份的数据
 const date = new Date();
 const month = date.getMonth() + 1;
@@ -776,316 +766,5 @@ const { chartData, chart2Data, chart3Data, chart4Data, chart5Data, chart6Data } 
 );
 </script>
 <style lang="scss" scoped>
-// !!!注意行内式 不会自动将px转化rem，不会实现响应式，不建议写行内式
 
-.large-screen-view {
-  padding-bottom: 10px;
-  //background: url("@/assets/images/view_bg.png") 0 0 / cover no-repeat;
-  min-height: 100vh;
-  background: #1a2158;
-
-  //   点击跳过按钮样式
-  #timer {
-    position: fixed;
-    z-index: 2;
-    top: 10px;
-    right: 20px;
-    width: 36px;
-    height: 36px;
-    margin: 0 auto;
-    cursor: pointer;
-
-    .timer-text {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      color: #ffffff;
-      background: rgba(0, 0, 0, 0.2);
-      border-radius: 50%;
-    }
-
-    .timer-round {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
-
-      .wrap {
-        width: 50%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        overflow: hidden;
-
-        .radius {
-          width: 200%;
-          height: 100%;
-          border-radius: 50%;
-          position: absolute;
-          top: 0;
-          border: 2px solid #ffffff;
-        }
-      }
-
-      .left {
-        left: 0;
-
-        .left-radius {
-          left: 0;
-          transform: rotate(45deg);
-          border-left-color: #3385ff;
-          border-bottom-color: #3385ff;
-          animation: leftRadius 3.7s linear;
-          /*动画停留在最后一帧*/
-          animation-fill-mode: forwards;
-          -moz-animation-fill-mode: forwards;
-          -webkit-animation-fill-mode: forwards;
-          -o-animation-fill-mode: forwards;
-        }
-      }
-
-      .right {
-        right: 0;
-
-        .right-radius {
-          right: 0;
-          transform: rotate(45deg);
-          border-right-color: #3385ff;
-          border-top-color: #3385ff;
-          animation: rightRadius 3.7s linear;
-          /*动画停留在最后一帧*/
-          animation-fill-mode: forwards;
-          -moz-animation-fill-mode: forwards;
-          -webkit-animation-fill-mode: forwards;
-          -o-animation-fill-mode: forwards;
-        }
-      }
-    }
-  }
-
-  @keyframes leftRadius {
-    0% {
-      transform: rotate(45deg);
-    }
-
-    50% {
-      transform: rotate(45deg);
-    }
-
-    100% {
-      transform: rotate(225deg);
-    }
-  }
-
-  @keyframes rightRadius {
-    0% {
-      transform: rotate(45deg);
-    }
-
-    50% {
-      transform: rotate(225deg);
-    }
-
-    100% {
-      transform: rotate(225deg);
-    }
-  }
-
-  .animate__animated {
-    min-height: 100vh;
-  }
-  .animate__animated.active {
-    animation: zoomInDown 1s;
-  }
-
-  @keyframes zoomInDown {
-    from {
-      opacity: 0;
-      -webkit-transform: scale3d(0.1, 0.1, 0.1) translate3d(0, -1000px, 0);
-      transform: scale3d(0.1, 0.1, 0.1) translate3d(0, -1000px, 0);
-      -webkit-animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
-      animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
-    }
-
-    60% {
-      opacity: 1;
-      -webkit-transform: scale3d(0.475, 0.475, 0.475) translate3d(0, 60px, 0);
-      transform: scale3d(0.475, 0.475, 0.475) translate3d(0, 60px, 0);
-      -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
-      animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
-    }
-  }
-
-  .container-header {
-    width: 100%;
-    height: 50px;
-    text-align: center;
-    box-sizing: border-box;
-    background: url(@/assets/images/pic-2.png) 80px 3px/85.5% 121.5% no-repeat,
-      // url(@/assets/images/header_bg_02.png) 0 0/100% 100% no-repeat;
-      url() 0 0/100% 100% no-repeat;
-
-    .my-time {
-      margin-top: 3px;
-    }
-
-    h3 {
-      line-height: 48px;
-      font-size: 20px;
-      color: rgb(107 208 251);
-     // text-shadow: rgb(255 255 255) 0px 0px 15px;
-      font-weight: bold;
-      justify-content: center;
-      text-align: center;
-    }
-  }
-
-  .container-content {
-    display: flex;
-    justify-content: space-between;
-    box-sizing: border-box;
-
-    .com-count-title {
-      color: #1bb4f9;
-      font-size: 9px;
-      padding: 0;
-    }
-
-    .com-screen-content,
-    .com-screen-content2 {
-      width: 100%;
-    }
-
-    .count-resource,
-    .count-share {
-      position: relative;
-      padding: 3px;
-      box-sizing: border-box;
-      border: 1px solid #1bb4f9;
-      box-shadow: #1bb4f9 0px 0px 5px 1px inset;
-      border-radius: 5px;
-      margin-bottom: 5px;
-    }
-
-    .q1 {
-      --borderWidth: 3px;
-      height: 60%;
-      position: relative;
-      z-index: 0;
-      overflow: hidden;
-      z-index: 0;
-      border-radius: 5px;
-      // box-shadow: 2px 2px 2px #182e57;
-      // border: none;
-
-      &::after,
-      &::before {
-        box-sizing: border-box;
-      }
-
-      &::before {
-        content: "";
-        position: absolute;
-        z-index: -2;
-        left: -50%;
-        top: -50%;
-        width: 200%;
-        height: 200%;
-        background-repeat: no-repeat;
-        background-position: 0 0;
-        background-image: conic-gradient(
-          transparent,
-          rgba(168, 239, 255, 1),
-          transparent 30%
-        );
-        animation: rotate 7s linear infinite;
-      }
-
-      &::after {
-        content: "";
-        position: absolute;
-        z-index: -1;
-        left: calc(var(--borderWidth) / 2);
-        top: calc(var(--borderWidth) / 2);
-        width: calc(100% - var(--borderWidth));
-        height: calc(100% - var(--borderWidth));
-        background-color: #141c48;
-        border-radius: 5px;
-      }
-    }
-
-    @keyframes rotate {
-      100% {
-        transform: rotate(1turn);
-      }
-    }
-
-    .container-left {
-      position: relative;
-      width: 300px;
-      padding: 0 0 0 12px;
-
-      .count-share {
-        height: 140px;
-        background-size: cover;
-      }
-    }
-
-    .mid {
-      width: 40vw;
-      max-height: 57vh;
-      margin-left: 10px;
-    }
-
-    .container-right {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      width: 300px;
-      padding: 0 12px 0 0;
-
-      .count-resource {
-        margin-left: 10px;
-        float: left;
-        height: 140px;
-        background-size: cover;
-      }
-    }
-  }
-
-  .footer-wrap {
-    padding: 0 12px;
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-
-    .border-container {
-      position: relative;
-      border: 1px solid #1bb4f9;
-      box-shadow: #1bb4f9 0px 0px 5px 1px inset;
-      border-radius: 5px;
-      width: 230px;
-      height: 145px;
-
-      .tile-size-color {
-        font-size: 12px;
-        color: #fff;
-      }
-
-      .name-title {
-        background: #4545e3;
-        padding: 3px 5px;
-        border-bottom-right-radius: 6px;
-        border-bottom-left-radius: 6px;
-        position: absolute;
-        left: 5%;
-        font-size: 8px;
-      }
-    }
-  }
-}
 </style>
