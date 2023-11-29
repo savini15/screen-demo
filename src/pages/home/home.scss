@@ -1,6 +1,6 @@
 .content_container{
     background-color: #1a2158;
-    height: calc(100vh - 50px);
+    min-height: calc(100vh - 50px);
     padding:5px;
     overflow: hidden;
 }
