@@ -52,7 +52,7 @@ let state = reactive({
       formatter: "",
       textStyle: {
         color: "#DADADA",
-        fontSize: "12",
+        fontSize: "8",
         width: 20,
         height: 30,
         overflow: "break",
@@ -121,8 +121,8 @@ let state = reactive({
       emphasis: {
         label: {
           color: "#fff",
-          backgroundColor:'yellow',
-          padding:5
+          backgroundColor: "yellow",
+          padding: 5,
         },
         // 鼠标放上高亮样式
         itemStyle: {
@@ -188,7 +188,7 @@ onMounted(async () => {
   // 设置地图
   state.option.geo.map = city;
   // 第二种方式通过js文件引入json
-  state.cityId = 'xian'//cityMap[city];
+  state.cityId = "xian"; //cityMap[city];
 
   // console.log(state.cityId);
   // 初始化echarts

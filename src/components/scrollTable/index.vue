@@ -80,9 +80,9 @@ let timer = null;
 const openScroll = () => {
   timer = setInterval(() => {
     if (Math.ceil(oul().scrollTop + oul().clientHeight) >= oul().scrollHeight) {
-      oul().scrollTop=0;
+      oul().scrollTop = 0;
     } else {
-      oul().scrollTop=oul().scrollTop + 1;
+      oul().scrollTop = oul().scrollTop + 1;
     }
   }, 30);
 };

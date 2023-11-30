@@ -185,23 +185,25 @@ onMounted(async () => {
   // 根据china.vue点击的省份，传过来的名称（china定义的ename）获取数据（不同json）！！！ 重要
   // 这里是第一种方式，通过上级定义的ename获取数据
   // city.vue中是第二种方式，通过单独的js文件的键值对的key获取对应的json
-  await axios.get(`../../../public/province/${provinceName}.json`).then((res) => {
-    /* 
+  await axios
+    .get(`../../../public/province/${provinceName}.json`)
+    .then((res) => {
+      /* 
     地图注册 第一个参数是地图名称，第二个参数是地图json数据，第一参数要和goe.map的值一样
   （这里注册的地图和goe.map 是接受china点击的ename 都是动态赋值）  
   */
-    echarts.registerMap(province, res.data);
-    // 模拟数据 series
-    res.data.features.forEach((item) => {
-      // series是数组里面data是一个对象，所以要用series[0].data.push
-      state.option.series[0].data.push({
-        name: item.properties.name,
-        value: Math.round(Math.random() * 100),
+      echarts.registerMap(province, res.data);
+      // 模拟数据 series
+      res.data.features.forEach((item) => {
+        // series是数组里面data是一个对象，所以要用series[0].data.push
+        state.option.series[0].data.push({
+          name: item.properties.name,
+          value: Math.round(Math.random() * 100),
+        });
       });
+      // 将定义的数据设置进myChart （myChary 是初始化echarts）
+      state.myChart.setOption(state.option);
     });
-    // 将定义的数据设置进myChart （myChary 是初始化echarts）
-    state.myChart.setOption(state.option);
-  });
 
   // 点击市数据跳转到区县数据
   state.myChart.on("click", (params) => {

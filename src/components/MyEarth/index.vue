@@ -13,12 +13,17 @@
         <a href="#" target="_blank" @click="changeEnterprise">
           <p class="effectposition"></p>
           <span class="effectposition"></span>
-          <img class="effectposition maindataeffect" src="@/assets/images/maindataeffect.png" />
+          <img
+            class="effectposition maindataeffect"
+            src="@/assets/images/maindataeffect.png"
+          />
           <div class="effectposition acrossremindeffectout">
             <div class="acrossremindeffectin"></div>
           </div>
-          <img class="effectposition maindataspecialeffect cloud-wrap-image"
-            src="@/assets/images/maindataspecialeffect.png" />
+          <img
+            class="effectposition maindataspecialeffect cloud-wrap-image"
+            src="@/assets/images/maindataspecialeffect.png"
+          />
           <div class="effectposition cloud-wrap">
             <img class="cloud" src="/favicon.ico" />
           </div>
@@ -26,43 +31,83 @@
       </div>
       <!--卫星动效-->
       <div class="circleeffectclass aroundfunctioneffect seal">
-        <img class="effectposition arounddataeffect02 circle-turn" src="@/assets/images/aroundeffect.png" />
-        <div class="effectposition acrossremindeffectout acrossremindeffectoutard">
+        <img
+          class="effectposition arounddataeffect02 circle-turn"
+          src="@/assets/images/aroundeffect.png"
+        />
+        <div
+          class="effectposition acrossremindeffectout acrossremindeffectoutard"
+        >
           <div class="acrossremindeffectin acrossremindeffectinard"></div>
         </div>
-        <img class="effectposition sign" src="@/assets/images/xingzhengshenpi.png" />
+        <img
+          class="effectposition sign"
+          src="@/assets/images/xingzhengshenpi.png"
+        />
       </div>
 
       <div class="circleeffectclass aroundfunctioneffect phone">
-        <img class="effectposition arounddataeffect01 circle-turn" src="@/assets/images/aroundeffect.png" />
-        <div class="effectposition acrossremindeffectout acrossremindeffectoutard">
+        <img
+          class="effectposition arounddataeffect01 circle-turn"
+          src="@/assets/images/aroundeffect.png"
+        />
+        <div
+          class="effectposition acrossremindeffectout acrossremindeffectoutard"
+        >
           <div class="acrossremindeffectin acrossremindeffectinard"></div>
         </div>
-        <img class="effectposition sign" src="@/assets/images/baixingpaiAPP.png" />
+        <img
+          class="effectposition sign"
+          src="@/assets/images/baixingpaiAPP.png"
+        />
       </div>
 
       <div class="circleeffectclass aroundfunctioneffect transport">
-        <img class="effectposition arounddataeffect02 circle-turn" src="@/assets/images/aroundeffect.png" />
-        <div class="effectposition acrossremindeffectout acrossremindeffectoutard">
+        <img
+          class="effectposition arounddataeffect02 circle-turn"
+          src="@/assets/images/aroundeffect.png"
+        />
+        <div
+          class="effectposition acrossremindeffectout acrossremindeffectoutard"
+        >
           <div class="acrossremindeffectin acrossremindeffectinard"></div>
         </div>
-        <img class="effectposition sign" src="@/assets/images/zhatuyunshu.png" />
+        <img
+          class="effectposition sign"
+          src="@/assets/images/zhatuyunshu.png"
+        />
       </div>
 
       <div class="circleeffectclass aroundfunctioneffect telephone">
-        <img class="effectposition arounddataeffect01 circle-turn" src="@/assets/images/aroundeffect.png" />
-        <div class="effectposition acrossremindeffectout acrossremindeffectoutard">
+        <img
+          class="effectposition arounddataeffect01 circle-turn"
+          src="@/assets/images/aroundeffect.png"
+        />
+        <div
+          class="effectposition acrossremindeffectout acrossremindeffectoutard"
+        >
           <div class="acrossremindeffectin acrossremindeffectinard"></div>
         </div>
-        <img class="effectposition sign" src="@/assets/images/12319rexian.png" />
+        <img
+          class="effectposition sign"
+          src="@/assets/images/12319rexian.png"
+        />
       </div>
 
       <div class="circleeffectclass aroundfunctioneffect badge">
-        <img class="effectposition arounddataeffect03 circle-turn" src="@/assets/images/aroundeffect.png" />
-        <div class="effectposition acrossremindeffectout acrossremindeffectoutard">
+        <img
+          class="effectposition arounddataeffect03 circle-turn"
+          src="@/assets/images/aroundeffect.png"
+        />
+        <div
+          class="effectposition acrossremindeffectout acrossremindeffectoutard"
+        >
           <div class="acrossremindeffectin acrossremindeffectinard"></div>
         </div>
-        <img class="effectposition sign" src="@/assets/images/zonghezhifa.png" />
+        <img
+          class="effectposition sign"
+          src="@/assets/images/zonghezhifa.png"
+        />
       </div>
 
       <div class="circleeffectclass decarround01 circle-left">
@@ -378,7 +423,6 @@ const changeEnterprise = () => {
   }
 
   :hover {
-
     p,
     span {
       transform: scale(9);
@@ -399,7 +443,6 @@ const changeEnterprise = () => {
 }
 
 @keyframes scrolleffect {
-
   25% {
     transform: rotate(90deg);
   }
@@ -457,7 +500,6 @@ const changeEnterprise = () => {
 }
 
 @keyframes scrolleffectarround01 {
-
   25% {
     transform: rotate(-90deg);
   }

@@ -1,60 +1,213 @@
 <template>
- <div class="content_container">
-  <el-row >
-    <el-col :span="6">
-      <list-card></list-card>
-      <list-card></list-card>
-      <list-card></list-card>
-      <list-card></list-card>
-    </el-col>
-    <el-col :span="12">
-      <h5 class="mb-2">main</h5>
+  <div class="content_container">
+    <el-row>
+      <el-col :span="6">
+        <list-card
+          :cardName="item.cardName"
+          :cardData="item.data"
+          :cardbg="item.bk"
+          v-for="(item, index) in cardList"
+          :key="index"
+        ></list-card>
+      </el-col>
+      <el-col :span="12">
+        <h5 class="mb-2">main</h5>
         <div class="">
           <router-view></router-view>
         </div>
         <el-row>
-          <el-col :span="8"> 
+          <el-col :span="8">
             <div class="">
               <div class="">1111</div>
               <my-chart :my-option="chart3Data" />
-             </div>
+            </div>
           </el-col>
-          <el-col :span="8"> 
+          <el-col :span="8">
             <div class="">
               <div class="">222</div>
               <my-chart :my-option="chart4Data" />
-             </div>
+            </div>
           </el-col>
-          <el-col :span="8"> 
+          <el-col :span="8">
             <div class="">
               <div class="">333</div>
               <my-chart :my-option="chart5Data" />
-             </div>
+            </div>
           </el-col>
         </el-row>
-       
-       
-      
-    </el-col>
-    <el-col :span="6">
-      <div class="count-resource q1">
-            <div class="com-screen-content2">
-              <!-- 卫星信息传递特效 -->
-              <my-earth />
-            </div>
+      </el-col>
+      <el-col :span="6">
+        <div class="count-resource q1">
+          <div class="com-screen-content2">
+            <!-- 卫星信息传递特效
+              <my-earth /> -->
+            <list-card
+              :cardName="item.cardName"
+              :cardData="item.data"
+              :cardbg="item.bk"
+              v-for="(item, index) in cardListRight"
+              :key="index"
+            ></list-card>
           </div>
-          <my-switch />
-     
-    </el-col>
-  </el-row>
- </div>
+        </div>
+        <!-- <my-switch /> -->
+      </el-col>
+    </el-row>
+  </div>
 </template>
 
 <script setup lang="ts">
 import * as echarts from "echarts";
 import myChart from "@/components/MyEcharts/index.vue";
-import ScrollTable from "@/components/scrollTable/index.vue";
-import './home.scss'
+// import ScrollTable from "@/components/scrollTable/index.vue";
+import "./home.scss";
+import { reactive, ref } from "vue";
+const cardList = ref([
+  {
+    cardName: "行政立法",
+    data: [
+      {
+        icon: "src/assets/images/greenbook.png",
+        key: "现行有效",
+        value: 1170,
+      },
+      {
+        icon: "src/assets/images/yellowarrow.png",
+        key: "本年度制定(修改)",
+        value: 1170,
+      },
+      {
+        icon: "src/assets/images/greycancel.png",
+        key: "本年度废止",
+        value: 1170,
+      },
+      {
+        icon: "src/assets/images/tele.png",
+        key: "热线",
+        value: 1170,
+      },
+      {
+        icon: "src/assets/images/internet.png",
+        key: "网络",
+        value: 1170,
+      },
+      {
+        icon: "src/assets/images/document.png",
+        key: "本年度案件",
+        value: 1170,
+      },
+    ],
+    bk: "src/assets/images/xzlf.png",
+  },
+  {
+    cardName: "行政立法",
+    data: [
+      {
+        icon: "src/assets/images/greenbook.png",
+        key: "现行有效",
+        value: 1170,
+      },
+      {
+        icon: "src/assets/images/yellowarrow.png",
+        key: "本年度制定(修改)",
+        value: 1170,
+      },
+      {
+        icon: "src/assets/images/greycancel.png",
+        key: "本年度废止",
+        value: 1170,
+      },
+    ],
+    bk: "src/assets/images/xzlf.png",
+  },
+]);
+const cardListRight = ref([
+  {
+    cardName: "公共法律服务平台数据",
+    data: [
+      {
+        icon: "src/assets/images/tele.png",
+        key: "热线",
+        value: 1170,
+      },
+      {
+        icon: "src/assets/images/internet.png",
+        key: "网络",
+        value: 1170,
+      },
+      {
+        icon: "src/assets/images/document.png",
+        key: "本年度案件",
+        value: 1170,
+      },
+    ],
+    bk: "src/assets/images/xzlf.png",
+  },
+  {
+    cardName: "律师业务",
+    data: [
+      {
+        icon: "src/assets/images/manager.png",
+        key: "律师",
+        value: 1170,
+      },
+      {
+        icon: "src/assets/images/buildings.png",
+        key: "律所",
+        value: 1170,
+      },
+      {
+        icon: "src/assets/images/document.png",
+        key: "本年度案件",
+        value: 1170,
+      },
+    ],
+    bk: "src/assets/images/xzlf.png",
+  },
+  {
+    cardName: "公证办理",
+    data: [
+      {
+        icon: "src/assets/images/manager.png",
+        key: "公证员",
+        value: 1170,
+      },
+      {
+        icon: "src/assets/images/buildings.png",
+        key: "公证所",
+        value: 1170,
+      },
+      {
+        icon: "src/assets/images/document.png",
+        key: "本年度案件",
+        value: 1170,
+      },
+    ],
+    bk: "src/assets/images/xzlf.png",
+  },
+  {
+    cardName: "司法鉴定",
+    data: [
+      {
+        icon: "src/assets/images/manager.png",
+        key: "司法鉴定人",
+        value: 1170,
+      },
+      {
+        icon: "src/assets/images/buildings.png",
+        key: "司法鉴定机构",
+        value: 1170,
+      },
+      {
+        icon: "src/assets/images/document.png",
+        key: "本年度案件",
+        value: 1170,
+      },
+    ],
+    bk: "src/assets/images/xzlf.png",
+  },
+]);
+
 // 获取1-当前月份的数据
 const date = new Date();
 const month = date.getMonth() + 1;
@@ -65,9 +218,21 @@ for (let i = 1; i <= month; i++) {
 let XData = arr;
 let yData = [1243, 2315, 1164, 3021, 3521, 4121, 2001, 1983, 1432];
 let baifenbi = [0.333, 0.444, 0.555, 0.777, 0.888];
-let grayBar = ["技术建设类", "排查与整改类", "机制建设类", "管理完善类", "技术标识类"];
+let grayBar = [
+  "技术建设类",
+  "排查与整改类",
+  "机制建设类",
+  "管理完善类",
+  "技术标识类",
+];
 let paiming = [5, 4, 3, 2, 1];
-let xingm = ["技术建设类", "排查与整改类", "机制建设类", "管理完善类", "技术标识"];
+let xingm = [
+  "技术建设类",
+  "排查与整改类",
+  "机制建设类",
+  "管理完善类",
+  "技术标识",
+];
 let state = reactive({
   chartData: {
     tooltip: {
@@ -444,7 +609,11 @@ let state = reactive({
               paiming[data.dataIndex] == 3
             ) {
               return (
-                "{yellow|" + paiming[data.dataIndex] + "  " + xingm[data.dataIndex] + "}"
+                "{yellow|" +
+                paiming[data.dataIndex] +
+                "  " +
+                xingm[data.dataIndex] +
+                "}"
               );
             } else {
               return paiming[data.dataIndex] + "  " + xingm[data.dataIndex];
@@ -761,10 +930,13 @@ let state = reactive({
     ],
   },
 });
-const { chartData, chart2Data, chart3Data, chart4Data, chart5Data, chart6Data } = toRefs(
-  state
-);
+const {
+  chartData,
+  chart2Data,
+  chart3Data,
+  chart4Data,
+  chart5Data,
+  chart6Data,
+} = toRefs(state);
 </script>
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

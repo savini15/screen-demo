@@ -1,8 +1,8 @@
 <template>
-    <ul class="nowTime" ref="nowTime">
-        <li></li>
-        <li></li>
-      </ul>
+  <ul class="nowTime" ref="nowTime">
+    <li></li>
+    <li></li>
+  </ul>
 </template>
 
 <script setup lang="ts">
@@ -60,34 +60,31 @@ const getNowFormatDate = () => {
 };
 onMounted(() => {
   getNowFormatDate();
-})
+});
 </script>
 
 <style lang="scss" scoped>
- .nowTime {
-      position: absolute;
-      left: 10px;
-      top: 23px;
-      font-size: 0;
+.nowTime {
+  position: absolute;
+  left: 10px;
+  top: 23px;
+  font-size: 0;
 
-      li {
-        display: inline-block;
-        width: 73px;
-        height: 21px;
-        font-size: 16px;
-        color: #000;
-        float: left;
-      
-      }
+  li {
+    display: inline-block;
+    width: 73px;
+    height: 21px;
+    font-size: 16px;
+    color: #000;
+    float: left;
+  }
 
-      li:nth-child(2) {
-        font-size: 9px;
-      
+  li:nth-child(2) {
+    font-size: 9px;
 
-        p {
-          text-align: left;
-        }
-      }
+    p {
+      text-align: left;
     }
-
+  }
+}
 </style>

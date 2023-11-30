@@ -20,19 +20,22 @@ import request from "./request";
 //    })
 
 // 轮播
-export const getBanner = () => request({ url: '/carousel/getReleaseList' });
+export const getBanner = () => request({ url: "/carousel/getReleaseList" });
 
 // 实例接口
-export const order = () => request({
-    url: "/home/floordata"
-});
+export const order = () =>
+  request({
+    url: "/home/floordata",
+  });
 // 媒体咨询
-export const news = (params) => request({
+export const news = (params) =>
+  request({
     url: "/article/getReleaseList",
-    params: params
-})
+    params: params,
+  });
 // 媒体查询详情
-export const newsDetail = (params) => request({
+export const newsDetail = (params) =>
+  request({
     url: "/article/detail",
-    params: params
-})
+    params: params,
+  });

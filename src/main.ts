@@ -19,8 +19,8 @@ import "amfe-flexible";
 
 // 自定义loading组件
 import Loading from "@/components/MyLoading";
-import ElementPlus from 'element-plus'
-import 'element-plus/dist/index.css'
+import ElementPlus from "element-plus";
+import "element-plus/dist/index.css";
 const app = createApp(App);
 
 // 打印环境变量
@@ -30,10 +30,10 @@ const app = createApp(App);
 // for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 //   app.component(key, component);
 // }
-import * as ElementPlusIconsVue from '@element-plus/icons-vue'
+import * as ElementPlusIconsVue from "@element-plus/icons-vue";
 
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
-  app.component(key, component)
+  app.component(key, component);
 }
 //全局注册
 app.use(ElementPlus);
