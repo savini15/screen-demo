@@ -29,7 +29,8 @@
       <el-col :span="12">
         <el-row align="middle">
           <el-col :span="24">
-            <router-view></router-view>
+            <public-select @optionChange="optionChange"></public-select>
+            <router-view :codeNo="codeNo"></router-view>
           </el-col>
         </el-row>
       </el-col>
@@ -72,12 +73,14 @@
 </template>
 
 <script setup lang="ts">
-import * as echarts from "echarts";
-import myChart from "@/components/MyEcharts/index.vue";
 // import ScrollTable from "@/components/scrollTable/index.vue";
 import "./home.scss";
 import { reactive, ref } from "vue";
-import { isInputElement } from "react-router-dom/dist/dom";
+const optionChange = (option) => {
+  console.log("optionChange   =====", option);
+  codeNo.value = option;
+};
+const codeNo = ref(null);
 const cardList = ref([
   {
     cardName: "行政立法",
@@ -302,7 +305,8 @@ const cardListRight = ref([
 ]);
 
 const cardListMid = ref([
-{ span: 6,
+  {
+    span: 6,
     cardName: "人民调解案件总数",
     slot: true,
     circlecharts: true,
@@ -393,4 +397,3 @@ const cardListMid = ref([
   },
 ]);
 </script>
-<style lang="scss" scoped></style>

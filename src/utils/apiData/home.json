@@ -1,0 +1,94 @@
+{
+  "msg": "查询成功！",
+  "code": 0,
+  "data": {
+    "公证办理": {
+      "ajbjl": null,
+      "gzjgsl": 14,
+      "gzyqksl": 133
+    },
+    "行政复议": {
+      "slz": 205,
+      "ss": 644,
+      "yyzs": 1024,
+      "ysj": 844,
+      "bs": 293,
+      "jcl": 3.5761,
+      "tjl": 3.6063,
+      "bsl": 4.1455,
+      "yszs": 1499,
+      "yzzytczs": 165
+    },
+    "行政规范性文件": {
+      "xxyx": 55
+    },
+    "人民调解案件总数": {
+      "rmtjajHtjf": 460,
+      "rmtjajShpcjf": 663,
+      "rmtjajLljf": 4142,
+      "rmtjajAjzs": 18426,
+      "rmtjajWygljf": 3116,
+      "rmtjajZdcjjf": 333,
+      "rmtjajHyjf": 2152,
+      "rmtjajLdzyjf": 829,
+      "rmtjajZjdjf": 610,
+      "rmtjajTjcg": 18046,
+      "rmtjajDljtsgjf": 1633,
+      "rmtjajQtjf": 4488
+    },
+    "基础工作": {
+      "sfs": 185,
+      "rmtjy": 13826,
+      "sfsgzry": 758,
+      "flfws": 75,
+      "flfwgzz": 520,
+      "rmtjzz": 3548
+    },
+    "社区矫正": {
+      "hx": 3306,
+      "zcrs": 3397,
+      "gz": 9,
+      "js": 12,
+      "jwzx": 70
+    },
+    "仲裁服务": {
+      "hj": 3005,
+      "qt": 1107,
+      "jrlaj": 130,
+      "fcjf": 912,
+      "jsgcaj": 432,
+      "mmjf": 492
+    },
+    "法律援助案件": {
+      "ajlxMs": 384,
+      "ajlxXz": 106,
+      "ajlxXs": 574
+    },
+    "司法鉴定": {
+      "jgSl": 56,
+      "ajBjs": 30610,
+      "ryRysl": 1121
+    },
+    "行政执法监督": {
+      "ycyzj": 15025,
+      "yzzytczs": 1064
+    },
+    "行政立法": {
+      "xzd": null,
+      "fz": null,
+      "xxyy": null
+    },
+    "律师业务": {
+      "lssl": 340,
+      "lsqkLssl": 6181,
+      "lsbjajsl": 11956
+    },
+    "公共法律服务平台数据": {
+      "fwfsSt": 2265,
+      "fwfsWl": 6523,
+      "fwfsDh": 113066,
+      "zxzs": 121843,
+      "ajzs": 1064
+    }
+  }
+}

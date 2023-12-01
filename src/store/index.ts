@@ -1,10 +1,11 @@
 //store.ts:
 import { createStore } from "vuex";
-import user from "./MyModule/user";
+import home from "./MyModule/home";
 const store = createStore({
   state() {
     return {
       count: "6667777",
+      selectArea:null
     };
   },
   getters: {
@@ -16,12 +17,16 @@ const store = createStore({
     increment(state) {
       state.count++;
     },
+    selectAreaChange(state,b){
+      console.log('21----',b)
+      state.selectArea = b;
+    }
   },
   actions: {},
 
   modules: {
     //  vuex分模块
-    user,
+    home,
   },
 });
 

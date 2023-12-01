@@ -23,6 +23,11 @@ const route = useRoute();
 // 引入定义的js，方便动态引入json
 import { cityMap } from "../../../public/public/city/china-main-city-map";
 
+import { watch } from "@vue/runtime-core";
+const props = defineProps(["codeNo"]);
+watch([props.codeNo], (newValue, oldValue) => {
+  console.log("区域选择 修改了", newValue, oldValue);
+});
 let state = reactive({
   id: "echarts_" + new Date().getTime() + Math.floor(Math.random() * 1000),
   myChart: null,
@@ -188,7 +193,7 @@ onMounted(async () => {
   // 设置地图
   state.option.geo.map = city;
   // 第二种方式通过js文件引入json
-  state.cityId = 'xian'//cityMap[city];
+  state.cityId = "xian"; //cityMap[city];
 
   // console.log(state.cityId);
   // 初始化echarts
@@ -215,9 +220,19 @@ onMounted(async () => {
   // });
   // 自适应
   window.addEventListener("resize", () => {
-    myChart.resize();
+    state.myChart.resize();
   });
 });
+
+// 指定高亮区域
+const cancelActive = (cityName) => {
+  state.myChart &&
+    state.myChart.dispatchAction({
+      type: "select",
+      // geo 中名称。
+      name: cityName,
+    });
+};
 </script>
 <style>
 .cityCharts {

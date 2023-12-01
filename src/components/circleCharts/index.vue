@@ -1,5 +1,5 @@
 <template>
-  <div >
+  <div>
     <my-echarts :myOption="options"></my-echarts>
   </div>
 </template>
@@ -13,21 +13,35 @@ const options = ref({
     // subtext: 'Fake Data',
     left: "center",
   },
+  tooltip: {
+    trigger: "item",
+    formatter: "{a}{b} : {c} ({d}%)",
+  },
   series: [
     {
       name: "",
       type: "pie",
       clockwise: false,
       radius: ["40%", "70%"],
+      minAngle: 15, //最小角度
+      startAngle: 270, //起始角度
       label: {
         show: true,
-        position: "outside",
-        fontSize:8,
+        alignTo: "left",
+        minMargin: 1,
+        edgeDistance: 10,
+        lineHeight: 5,
+        fontSize: 8,
+        color: "inherit",
         formatter(param) {
           return param.name + " (" + param.percent * 1 + "%)";
         },
       },
-
+      labelLine: {
+        length: 5,
+        length2: 5,
+        maxSurfaceAngle: 20,
+      },
       emphasis: {
         itemStyle: {
           shadowBlur: 10,
@@ -36,7 +50,7 @@ const options = ref({
         },
       },
       data: [
-        { value: 30, name: "rose 1" },
+        { value: 30, name: "rose 1", color: "red" },
         { value: 28, name: "rose 2" },
         { value: 26, name: "rose 3" },
         { value: 24, name: "rose 4" },
