@@ -1,7 +1,7 @@
 .content_container {
   background-color: hsl(232.7deg 56.06% 25.88%);
-  min-height: calc(100vh - 50px);
-  padding: 5px;
+  height: calc(100vh - 38px);
+  padding: 5px 15px;
   overflow: hidden;
 }
 // !!!注意行内式 不会自动将px转化rem，不会实现响应式，不建议写行内式

@@ -121,8 +121,8 @@ let state = reactive({
       emphasis: {
         label: {
           color: "#fff",
-          backgroundColor: "yellow",
-          padding: 5,
+          backgroundColor:'yellow',
+          padding:5
         },
         // 鼠标放上高亮样式
         itemStyle: {
@@ -188,7 +188,7 @@ onMounted(async () => {
   // 设置地图
   state.option.geo.map = city;
   // 第二种方式通过js文件引入json
-  state.cityId = "xian"; //cityMap[city];
+  state.cityId = 'xian'//cityMap[city];
 
   // console.log(state.cityId);
   // 初始化echarts
@@ -222,7 +222,7 @@ onMounted(async () => {
 <style>
 .cityCharts {
   width: 100%;
-  height: 200px;
+  height: 300px;
   margin: 0 auto;
 }
 .tip {

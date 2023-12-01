@@ -5,8 +5,11 @@ import '@vue/runtime-core'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    CircleCharts: typeof import('./src/components/circleCharts/index.vue')['default']
+    CountRate: typeof import('./src/components/countRate/index.vue')['default']
     Header: typeof import('./src/components/header/index.vue')['default']
     ListCard: typeof import('./src/components/listCard/index.vue')['default']
+    'ListCard copy': typeof import('./src/components/listCard copy/index.vue')['default']
     Loading: typeof import('./src/components/MyLoading/loading.vue')['default']
     MyEarth: typeof import('./src/components/MyEarth/index.vue')['default']
     MyEcharts: typeof import('./src/components/MyEcharts/index.vue')['default']
