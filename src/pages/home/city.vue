@@ -121,8 +121,8 @@ let state = reactive({
       emphasis: {
         label: {
           color: "#fff",
-          backgroundColor:'yellow',
-          padding:5
+          backgroundColor: "yellow",
+          padding: 5,
         },
         // 鼠标放上高亮样式
         itemStyle: {
