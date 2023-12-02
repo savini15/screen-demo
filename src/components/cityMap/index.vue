@@ -1,8 +1,11 @@
 <template>
-  <!-- 中国地图 展示市 二级页面 接受来自省点击的ename，渲染不同省json-->
-  <div @click="$router.go(-1)" style="color: #fff; font-size: 20px">返回</div>
-  <!-- echarts 容器 -->
-  <div :id="state.id" class="provinceCharts"></div>
+  <!-- 中国地图 渲染县级 三级页面 接受来自市点击的name，渲染不同市json-->
+  <!-- <div @click="$router.go(-1)" style="color: #fff; font-size: 20px">返回</div> -->
+  <!-- <div class="tip" v-if="state.cityId === undefined">
+      敬请谅解，乡镇数据正在努力更新中...
+    </div> -->
+  <!-- echarts的容器 -->
+  <div :id="state.id" class="cityCharts"></div>
 </template>
 
 <script setup>
@@ -16,13 +19,29 @@ import { onMounted, reactive, ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
 const router = useRouter();
 const route = useRoute();
-// 定义echarts的数据
+
+// 引入定义的js，方便动态引入json
+import { cityMap } from "../../../public/public/city/china-main-city-map";
+
+import { watch, computed } from "vue";
+import { useStore } from "vuex";
+const store = useStore();
+console.log("store-----", store);
+const selectArea = computed(() => {
+  //返回的是ref对象
+  return store.state.selectArea;
+});
+
+watch(selectArea, (newValue, oldValue) => {
+  console.log("地图修改了", newValue, oldValue);
+  cancelActive(newValue);
+});
 let state = reactive({
   id: "echarts_" + new Date().getTime() + Math.floor(Math.random() * 1000),
   myChart: null,
   option: {
     // 背景颜色
-    // backgroundColor: "#0b1938",
+    // backgroundColor: "#0b1c3e",
     title: {
       text: "",
       top: "8%",
@@ -35,7 +54,7 @@ let state = reactive({
     },
     // 提示浮窗样式
     tooltip: {
-      show: true,
+      show: false,
       trigger: "item",
       alwaysShowContent: false,
       backgroundColor: "#0C121C",
@@ -46,7 +65,7 @@ let state = reactive({
       formatter: "",
       textStyle: {
         color: "#DADADA",
-        fontSize: "12",
+        fontSize: "8",
         width: 20,
         height: 30,
         overflow: "break",
@@ -56,7 +75,7 @@ let state = reactive({
 
     visualMap: {
       //分段型视觉映射组件
-      show: true,
+      show: false,
       type: "piecewise",
       left: 50,
       bottom: 50,
@@ -64,62 +83,63 @@ let state = reactive({
       itemWidth: 10,
       itemHeight: 10,
       inverse: true,
-      //设置字体颜色
+      color: "#fff",
       textStyle: {
         color: "#ffffff",
       },
-      // 图例
       // lt:小于; lte:小于等于; gt:大于; gte:大于等于;
       pieces: [
         {
           lt: 5,
           label: " < 5",
-          color: "#83CBAC",
+          color: "#3749b9",
         },
         {
           gte: 5,
           lte: 10,
           label: "5 - 10",
-          color: "#55BB8A",
+          color: "#3749b9",
         },
         {
           gt: 10,
           lte: 15,
           label: "10 - 15",
-          color: "#20A162",
+          color: "#3749b9",
         },
         {
           gt: 15,
           lte: 20,
           label: "15 - 20",
-          color: "#9ABEFA",
+          color: "#3749b9",
         },
         {
           gt: 20,
           lte: 30,
           label: "20 - 30",
-          color: "#78A9F9",
+          color: "#3749b9",
         },
         {
           gt: 30,
           label: "> 30",
-          color: "#5693F7",
+          color: "#3749b9",
         },
       ],
     },
 
     // 地图配置
     geo: {
-      map: "", //会从点击的省份的ename中获取
+      map: "",
       roam: true, //是否开启平游或缩放
-      zoom: 1.1, //当前视角的缩放比例
+      zoom: 1.6, //当前视角的缩放比例
       emphasis: {
         label: {
           color: "#fff",
+          backgroundColor: "yellow",
+          padding: 5,
         },
         // 鼠标放上高亮样式
         itemStyle: {
-          areaColor: "#389BB7",
+          areaColor: "#2297fe",
           borderWidth: 0,
         },
       },
@@ -141,14 +161,14 @@ let state = reactive({
           colorStops: [
             {
               offset: 0,
-              color: "rgba(147, 235, 248, 0)", // 0% 处的颜色
+              color: "#3749b9", // 0% 处的颜色
             },
             {
               offset: 1,
-              color: "rgba(147, 235, 248, .2)", // 100% 处的颜色
+              color: "#3749b9", // 100% 处的颜色
             },
           ],
-          globalCoord: false,
+          globalCoord: false, // 缺省为 false
         },
         shadowColor: "rgba(128, 217, 248, 1)",
         shadowOffsetX: -2,
@@ -161,7 +181,7 @@ let state = reactive({
 
     series: [
       {
-        name: "模拟数据",
+        name: "",
         type: "map",
         geoIndex: 0, // 不可缺少，否则无tooltip 指示效果
         data: [{ name: "", value: "" }],
@@ -171,57 +191,67 @@ let state = reactive({
 });
 
 onMounted(async () => {
-  /*  接受来自china.vue的参数:
-     console.log(route.query);  打印后====》 { "provinceName": "xinjiang", "province": "新疆" } */
-  const provinceName = route.query.provinceName;
-  const province = route.query.province;
+  // console.log(route.query);
+  /*  接受来自province.vue的参数:
+       console.log(route.query);  打印后====》类似 {city: '哈密市'}*/
+  const city = route.query.city;
 
   // 设置地图标题
-  state.option.title.text = province;
+  state.option.title.text = city;
   // 设置地图
-  state.option.geo.map = province;
+  state.option.geo.map = city;
+  // 第二种方式通过js文件引入json
+  state.cityId = "xian"; //cityMap[city];
+
+  // console.log(state.cityId);
   // 初始化echarts
   state.myChart = echarts.init(document.getElementById(state.id));
-  // 根据china.vue点击的省份，传过来的名称（china定义的ename）获取数据（不同json）！！！ 重要
-  // 这里是第一种方式，通过上级定义的ename获取数据
-  // city.vue中是第二种方式，通过单独的js文件的键值对的key获取对应的json
-  await axios
-    .get(`../../../public/province/${provinceName}.json`)
-    .then((res) => {
-      /* 
-    地图注册 第一个参数是地图名称，第二个参数是地图json数据，第一参数要和goe.map的值一样
-  （这里注册的地图和goe.map 是接受china点击的ename 都是动态赋值）  
-  */
-      echarts.registerMap(province, res.data);
-      // 模拟数据 series
-      res.data.features.forEach((item) => {
-        // series是数组里面data是一个对象，所以要用series[0].data.push
-        state.option.series[0].data.push({
-          name: item.properties.name,
-          value: Math.round(Math.random() * 100),
-        });
-      });
-      // 将定义的数据设置进myChart （myChary 是初始化echarts）
-      state.myChart.setOption(state.option);
-    });
+  if (state.cityId === undefined) return;
 
-  // 点击市数据跳转到区县数据
-  state.myChart.on("click", (params) => {
-    router.push({
-      path: "/city",
-      query: { city: params.name },
+  await axios.get(`../../../public/city/${state.cityId}.json`).then((res) => {
+    // console.log('\😂👨🏾‍❤️‍👨🏼==>： ',res);
+    // 地图注册，第一个参数的名字必须和option.geo.map一致，第二个参数是地图json数据
+    echarts.registerMap(city, res.data);
+    res.data.features.forEach((item) => {
+      // console.log(item);
+      // series是数组里面data是一个对象，所以要用series[0].data.push
+      state.option.series[0].data.push({
+        name: item.properties.name,
+        value: Math.floor(Math.random() * 100),
+      });
     });
+    state.myChart.setOption(state.option);
   });
-  // echarts适应屏幕大小
+
+  // state.myChart.on("click", function (params) {
+  //   console.log("😂👨🏾‍❤️‍👨🏼==>： ", params);
+  // });
+  // 自适应
   window.addEventListener("resize", () => {
-    myChart.resize();
+    state.myChart.resize();
   });
 });
+
+// 指定高亮区域
+const cancelActive = (cityName) => {
+  state.myChart &&
+    state.myChart.dispatchAction({
+      type: "select",
+      // geo 中名称。
+      name: cityName,
+    });
+};
 </script>
-<style scoped>
-.provinceCharts {
-  width: 400px;
-  height: 290px;
+<style>
+.cityCharts {
+  width: 100%;
+  height: 300px;
   margin: 0 auto;
+}
+.tip {
+  text-align: center;
+  margin-top: 30px;
+  color: #fff;
+  font-size: 15px;
 }
 </style>

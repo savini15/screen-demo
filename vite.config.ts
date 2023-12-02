@@ -53,9 +53,9 @@ export default defineConfig({
       // 选项写法
       "/api": {
         // 跨域这里只需要写本地接口就行，线上和test环境已经在network/baseUrl.js中配置好了
-        target: "http://192.168.0.52:8083",
+        target: "http://219.145.89.71:9002",
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ""),
+        // rewrite: (path) => path.replace(/^\/api/, ""),
       },
     },
   },

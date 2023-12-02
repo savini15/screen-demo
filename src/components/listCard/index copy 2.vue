@@ -2,10 +2,6 @@
   <div class="card_list" :style="cardStyle">
     <el-card class="box-card">
       <template #header>
-        <div class="card-header-box" :style="headerStyle"></div>
-        <div class="card-header-icon">
-          <img src="@/assets/images/arrowright.png" alt="" />
-        </div>
         <div class="card-header" @click="goDetail()">
           {{ cardName }}
         </div>
@@ -14,7 +10,7 @@
         <div class="card-body">
           <slot name="rate"></slot>
           <slot name="circleCharts"></slot>
-          <slot name="linecharts"></slot>
+          <slot name="lineCharts"></slot>
           <el-row :gutter="20">
             <el-col
               :span="getSpan()"
@@ -51,8 +47,10 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 const router = useRouter();
+
 const props = defineProps([
   "cardName",
+  "cardPath",
   "cardData",
   "cardbg",
   "propsWidth",
@@ -65,7 +63,7 @@ const cardStyle = ref({
   backgroundSize: "cover",
   width: props.propsWidth || "100%",
   height: props.propsHeight || "auto",
-  // paddingRight: "0.08rem",
+  paddingRight: "0.08rem",
 });
 
 const pgStyle = ref({
@@ -76,7 +74,10 @@ const pgStyle = ref({
 });
 
 const headerStyle = ref({
-  width: `${props.cardName.length / 10 + 0.25}rem`,
+  color: "yellow",
+  fontSize: "10px",
+  textAlign: "center",
+  width: "40px",
 });
 
 const getSpan = (i) => {
@@ -88,6 +89,7 @@ const getSpan = (i) => {
   }
   return a;
 };
+
 const goDetail = () => {
   console.log("props 95------", props.cardPath);
   // 在组件中调用 router.push() 来进行路由跳转
@@ -96,6 +98,12 @@ const goDetail = () => {
 </script>
 
 <style lang="scss">
+.arrow_icon {
+  width: 0.1rem;
+  height: 0.1rem;
+  margin-right: 10px;
+}
+
 .card_list {
   text-align: center;
   margin-bottom: 0.1rem;
@@ -131,6 +139,16 @@ const goDetail = () => {
   }
 }
 
+.card-header {
+  width: 100%;
+  position: relative;
+  bottom: 0;
+  overflow: hidden;
+  z-index: 2;
+  color: #ffffff;
+  font-size: 0.1rem;
+}
+
 .el-card {
   width: 100%;
   height: 100%;
@@ -138,52 +156,23 @@ const goDetail = () => {
   border: none;
   box-shadow: none;
   background: none;
-  border-left: 0.01rem solid;
-  border-bottom: 0.01rem solid;
-  border-radius: 0.01rem;
+  border-left: 1px solid;
+  border-bottom: 1px solid;
+  border-radius: 2px;
   border-image: linear-gradient(to right, #008790, #6d8d40, #163897) 1;
-  clip-path: inset(0 round 0.01rem);
-}
-.card-header {
-  padding-top: 0.05rem;
-  width: 100%;
-  position: relative;
-  bottom: 0;
-  left: 0.1rem;
-  overflow: hidden;
-  z-index: 2;
-  color: #ffffff;
-  font-size: 0.08rem;
+  clip-path: inset(0 round 2px);
 }
 
 .el-card__header {
-  height: 0.15rem;
+  height: 0.2rem;
   position: relative;
-  padding: 0;
   bottom: 0;
   border-bottom: none;
+  padding: 0.05rem;
   text-align: left;
-  padding-left: 0.08rem;
-}
-.card-header-icon {
-  width: 0.25rem;
-  height: 0.14rem;
-  line-height: 0.16rem;
-  border-top: 0.01rem solid #23a1c4;
-  border-left: 0.01rem solid #23a1c4;
-  left: 0.02rem;
-  top: 0.02rem;
-  position: absolute;
-  text-align: left;
-  z-index: 2;
-  img {
-    width: 0.08rem;
-    height: auto;
-    margin-left: 0.05rem;
-  }
 }
 
-.card-header-box {
+.el-card__header::before {
   content: "";
   display: block;
   z-index: 1;
@@ -191,37 +180,14 @@ const goDetail = () => {
   top: 0;
   left: 0;
   bottom: -0.01rem;
-  width: 1rem;
+  width: var(--header-width);
   border-right: 0.014rem solid;
   border-top: 0.01rem solid;
   border-image: linear-gradient(to right, #23a1c4, #507a4f) 1;
-  // clip-path: inset(0 round 0.01rem);
+  clip-path: inset(0 round 0.01rem);
   background-color: #1a215a;
   transform-origin: 0 100%;
   transform: skewX(45deg);
-}
-
-.card-header-box::after {
-  content: "";
-  display: block;
-  z-index: 1;
-  position: absolute;
-  top: 0;
-  right: -0.1rem;
-  bottom: 0.02rem;
-  width: 0.01rem;
-  background-color: #23a1c4;
-}
-.card-header-box::before {
-  content: "";
-  display: block;
-  z-index: 1;
-  position: absolute;
-  top: 0;
-  right: -0.07rem;
-  bottom: 0.02rem;
-  width: 0.025rem;
-  background-color: #23a1c4;
 }
 
 .card_title_text {
@@ -233,7 +199,7 @@ const goDetail = () => {
 .el-card__body {
   position: relative;
   top: -1;
-  height: calc(100% - 0.15rem);
+  height: calc(100% - 0.2rem);
   width: 100%;
   padding: 0.15rem;
   overflow: hidden;

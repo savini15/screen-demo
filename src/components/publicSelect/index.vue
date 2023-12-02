@@ -16,17 +16,23 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-import apiRes from "@/utils/apiData/quyu.js";
-import {useStore} from 'vuex' ;
-const store = useStore()
+import { ref, onMounted } from "vue";
+import { mapCities } from "../../network/api.js";
+import { useStore } from "vuex";
+import * as _ from "lodash";
+const store = useStore();
 const value = ref(null);
-const options = apiRes.data;
+const options = ref([]);
 let $emit = defineEmits(["optionChange"]);
 const optionChange = () => {
   $emit("optionChange", value.value);
-  store.commit('selectAreaChange', '新城区')
+  const county = _.find(options.value, { code: value.value }).name;
+  store.commit("selectAreaChange", { code: value.value, county });
 };
+onMounted(async () => {
+  options.value = await mapCities();
+  console.log("32----", options.value);
+});
 </script>
 
 <style scoped lang="scss">

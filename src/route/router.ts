@@ -10,8 +10,16 @@ import NoFond from "./NoFond.ts";
 
 //引入main.ts
 import app from "../main.ts";
-
+// import Law from  "@/pages/law/l.vue"
 const routes = [
+  {
+    path: "/law",
+    name: "law",
+    component: () => import("@/pages/home copy/home.vue"),
+    meta: {
+      loading: true,
+    },
+  },
   {
     // 测路由目前为测试vuex
     path: "/login",
@@ -21,43 +29,16 @@ const routes = [
     },
   },
   {
-    // 重定向到china
     path: "/",
-    redirect: "/city",
+    redirect: "/home",
   },
   {
-    path: "/",
+    path: "/home",
     name: "home",
     component: () => import("@/pages/home/home.vue"),
     meta: {
       loading: true,
     },
-    children: [
-      {
-        path: "/china",
-        name: "",
-        component: () => import("@/pages/home/china.vue"),
-        meta: {
-          loading: true,
-        },
-      },
-      {
-        path: "/city",
-        name: "",
-        component: () => import("@/pages/home/city.vue"),
-        meta: {
-          loading: true,
-        },
-      },
-      {
-        path: "/province",
-        name: "",
-        component: () => import("@/pages/home/province.vue"),
-        meta: {
-          loading: true,
-        },
-      },
-    ],
   },
 
   // 路由分模块

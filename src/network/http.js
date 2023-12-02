@@ -11,7 +11,7 @@ app.config.globalProperties.$loading.showLoading();
 // 创建axios实例
 const http = axios.create({
   baseURL, //配置了跨域,起了别名api,在baseBUL用了别名,这里使用baseURL,配置在下面vue.config.js
-  timeout: 6000,
+  // timeout: 6000,
   withDirectives: true, // 是否携带cookies
 });
 // 请求拦截

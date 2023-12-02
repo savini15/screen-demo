@@ -1,16 +1,14 @@
 <template>
-  <div style=" height: 100%;">
-    <my-echarts :myOption="options"></my-echarts>
+  <div style="height: 100%">
+    <my-echarts :myOption="options" v-if="changeDom"></my-echarts>
   </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
-const props = defineProps(["seriesData"]);
+import { ref, computed, watch } from "vue";
+const props = defineProps(["chartData"]);
 const options = ref({
   title: {
-    // text: 'Nightingale Chart',
-    // subtext: 'Fake Data',
     left: "center",
   },
   tooltip: {
@@ -49,17 +47,20 @@ const options = ref({
           shadowColor: "rgba(0, 0, 0, 0.5)",
         },
       },
-      data: [
-        { value: 30, name: "rose 1", color: "red" },
-        { value: 28, name: "rose 2" },
-        { value: 26, name: "rose 3" },
-        { value: 24, name: "rose 4" },
-        { value: 22, name: "rose 5" },
-        { value: 20, name: "rose 6" },
-        { value: 18, name: "rose 7" },
-        { value: 16, name: "dd 8" },
-      ],
+      data: [],
     },
   ],
+});
+const propOpts = computed(() => {
+  //返回的是ref对象
+  return props.chartData;
+});
+let changeDom = ref(false);
+watch(propOpts, (newValue, oldValue) => {
+  changeDom.value = false;
+  const data = JSON.parse(JSON.stringify(newValue));
+  changeDom.value = true;
+  options.value.series[0].data = data; //newValue;
+  console.log("propOpts", data, options);
 });
 </script>

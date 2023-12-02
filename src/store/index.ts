@@ -4,23 +4,24 @@ import home from "./MyModule/home";
 const store = createStore({
   state() {
     return {
-      count: "6667777",
-      selectArea:null
+      areaCode: null,
+      selectArea: null,
     };
   },
   getters: {
-    getCount(state) {
-      return state.count;
-    },
+    // getCount(state) {
+    //   return state.count;
+    // },
   },
   mutations: {
-    increment(state) {
-      state.count++;
+    // increment(state) {
+    //   state.count++;
+    // },
+    selectAreaChange(state, data) {
+      console.log("21----", data);
+      state.selectArea = data.county;
+      state.areaCode = data.code;
     },
-    selectAreaChange(state,b){
-      console.log('21----',b)
-      state.selectArea = b;
-    }
   },
   actions: {},
 

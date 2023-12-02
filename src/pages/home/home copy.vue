@@ -15,7 +15,7 @@
             :props-height="item.height"
           >
             <template v-slot:rate>
-              <el-row v-if="item.rate">
+              <el-row :gutter="20" style="padding: 10px" v-if="item.rate">
                 <el-col
                   :span="24 / item.slotData.length"
                   :key="p"
@@ -31,7 +31,7 @@
       <el-col :span="12">
         <list-card :cardName="cardMap.cardName" :propsHeight="cardMap.height">
           <template v-slot:rate>
-            <public-select></public-select>
+            <public-select @optionChange="optionChange"></public-select>
             <city-map></city-map>
           </template>
         </list-card>
@@ -68,10 +68,7 @@
           :props-height="item.height"
         >
           <template v-slot:circleCharts>
-            <circle-charts
-              v-if="item.circlecharts"
-              :chartData="item.chartData"
-            ></circle-charts>
+            <circle-charts v-if="item.circlecharts"></circle-charts>
           </template>
         </list-card>
         <div style="clear: both"></div>
@@ -83,23 +80,13 @@
 <script setup lang="ts">
 // import ScrollTable from "@/components/scrollTable/index.vue";
 import "./home.scss";
-import { reactive, ref, onMounted, computed, watch } from "vue";
+import { reactive, ref, onMounted } from "vue";
 import { indexData } from "../../network/api.js";
-import mappingKeys from "@/utils/apiData/mappingKeys.js";
-import { useStore } from "vuex";
-const store = useStore();
-console.log("store-----", store);
-const areaCode = computed(() => {
-  //返回的是ref对象
-  return store.state.areaCode;
-});
-
-watch(areaCode, (newValue, oldValue) => {
-  console.log("区域选择 修改了", newValue, oldValue);
-  refresh(newValue);
-});
-import * as _ from "lodash";
-
+const optionChange = (option) => {
+  console.log("optionChange   =====", option);
+  codeNo.value = option;
+};
+const codeNo = ref(null);
 const cardMap = ref({
   cardName: "业务地图",
   height: "calc(100% - 20px)",
@@ -112,17 +99,17 @@ const cardList = ref([
       {
         icon: "src/assets/images/greenbook.png",
         key: "现行有效",
-        value: 0,
+        value: 1170,
       },
       {
         icon: "src/assets/images/yellowarrow.png",
         key: "本年度制定(修改)",
-        value: 0,
+        value: 1170,
       },
       {
         icon: "src/assets/images/greycancel.png",
         key: "本年度废止",
-        value: 0,
+        value: 1170,
       },
     ],
   },
@@ -134,41 +121,41 @@ const cardList = ref([
     rate: true,
     slotData: [
       {
-        value: 0,
+        total: 1170,
         name: "复议总数",
         color: "yellow",
         data: [
           {
-            total: 0,
+            total: 756,
             name: "已审结",
-            rate: "0",
+            rate: "64.7",
             color: "#4892fb",
             index: 1,
           },
           {
-            total: 0,
+            total: 414,
             name: "审理中",
-            rate: "0",
+            rate: "35.3",
             color: "#7dfbb2",
           },
         ],
       },
       {
-        value: 0,
+        total: 1170,
         name: "应诉总数",
         color: "yellow",
         data: [
           {
-            total: 0,
+            total: 756,
             name: "胜诉",
-            rate: "0",
+            rate: "64.7",
             color: "#fe6d74",
             index: 1,
           },
           {
-            total: 0,
+            total: 414,
             name: "败诉",
-            rate: "0",
+            rate: "35.3",
             color: "#56d7f9",
           },
         ],
@@ -207,16 +194,16 @@ const cardList = ref([
         color: "yellow",
         data: [
           {
-            total: 0,
+            total: 756,
             name: "已持有行政执法员证件数",
-            rate: "0",
+            rate: "64.7",
             color: "#4892fb",
             index: 1,
           },
           {
-            total: 0,
+            total: 414,
             name: "审理中",
-            rate: "0",
+            rate: "35.3",
             color: "#7dfbb2",
           },
         ],
@@ -235,7 +222,7 @@ const cardList = ref([
       {
         icon: "src/assets/images/greenbook.png",
         key: "现行有效",
-        value: 0,
+        value: 1170,
       },
     ],
   },
@@ -247,17 +234,17 @@ const cardListRight = ref([
       {
         icon: "src/assets/images/tele.png",
         key: "热线",
-        value: 0,
+        value: 1170,
       },
       {
         icon: "src/assets/images/internet.png",
         key: "网络",
-        value: 0,
+        value: 1170,
       },
       {
         icon: "src/assets/images/document.png",
         key: "本年度案件",
-        value: 0,
+        value: 1170,
       },
     ],
   },
@@ -267,17 +254,17 @@ const cardListRight = ref([
       {
         icon: "src/assets/images/manager.png",
         key: "律师",
-        value: 0,
+        value: 1170,
       },
       {
         icon: "src/assets/images/buildings.png",
         key: "律所",
-        value: 0,
+        value: 1170,
       },
       {
         icon: "src/assets/images/document.png",
         key: "本年度案件",
-        value: 0,
+        value: 1170,
       },
     ],
   },
@@ -287,17 +274,17 @@ const cardListRight = ref([
       {
         icon: "src/assets/images/manager.png",
         key: "公证员",
-        value: 0,
+        value: 1170,
       },
       {
         icon: "src/assets/images/buildings.png",
         key: "公证所",
-        value: 0,
+        value: 1170,
       },
       {
         icon: "src/assets/images/document.png",
         key: "本年度案件",
-        value: 0,
+        value: 1170,
       },
     ],
   },
@@ -307,17 +294,17 @@ const cardListRight = ref([
       {
         icon: "src/assets/images/manager.png",
         key: "司法鉴定人",
-        value: 0,
+        value: 1170,
       },
       {
         icon: "src/assets/images/buildings.png",
         key: "司法鉴定机构",
-        value: 0,
+        value: 1170,
       },
       {
         icon: "src/assets/images/document.png",
         key: "本年度案件",
-        value: 0,
+        value: 1170,
       },
     ],
   },
@@ -331,7 +318,6 @@ const cardListMid = ref([
     slot: true,
     circlecharts: true,
     cardData: [],
-    chartData: [],
   },
   {
     span: 3,
@@ -340,51 +326,44 @@ const cardListMid = ref([
     slot: true,
     circlecharts: true,
     cardData: [],
-    chartData: [],
   },
   {
     span: 3,
-    height: "calc(100% - .1rem)",
+    height: "calc(100% - .11rem)",
     cardName: "法律援助案件",
     slot: true,
     circlecharts: true,
     cardData: [],
-    chartData: [],
   },
   {
-    cardName: "基础工作",
+    cardName: "基层工作",
     wrap: true,
     span: 6,
     data: [
       {
-        icon: "src/assets/images/gril.png",
-        key: "司法所工作人员",
-        value: 0,
+        icon: "src/assets/images/bluepeoplebook.png",
+        key: "在册人数",
+        value: 1170,
       },
       {
-        icon: "src/assets/images/manager.png",
-        key: "基层法律服务工作者",
-        value: 0,
+        icon: "src/assets/images/canladerpeople.png",
+        key: "缓刑",
+        value: 1170,
       },
       {
-        icon: "src/assets/images/shakehands.png",
-        key: "人民调解员",
-        value: 0,
+        icon: "src/assets/images/zan.png",
+        key: "暂予监外执行",
+        value: 1170,
       },
       {
-        icon: "src/assets/images/housestair.png",
-        key: "司法所",
-        value: 0,
+        icon: "src/assets/images/prisonpeople.png",
+        key: "管制",
+        value: 1170,
       },
       {
-        icon: "src/assets/images/buildings.png",
-        key: "基层法律服务所",
-        value: 0,
-      },
-      {
-        icon: "src/assets/images/peopledesk.png",
-        key: "人民调解组织",
-        value: 0,
+        icon: "src/assets/images/canladerpeople.png",
+        key: "假释",
+        value: 1170,
       },
     ],
   },
@@ -396,68 +375,34 @@ const cardListMid = ref([
       {
         icon: "src/assets/images/bluepeoplebook.png",
         key: "在册人数",
-        value: 0,
+        value: 1170,
       },
       {
-        icon: "src/assets/images/huanxing.png",
+        icon: "src/assets/images/canladerpeople.png",
         key: "缓刑",
-        value: 0,
+        value: 1170,
       },
       {
         icon: "src/assets/images/zan.png",
         key: "暂予监外执行",
-        value: 0,
+        value: 1170,
       },
       {
         icon: "src/assets/images/prisonpeople.png",
         key: "管制",
-        value: 0,
+        value: 1170,
       },
       {
-        icon: "src/assets/images/jiashi.png",
+        icon: "src/assets/images/canladerpeople.png",
         key: "假释",
-        value: 0,
+        value: 1170,
       },
     ],
   },
 ]);
-const refresh = async (code) => {
-  const data = await indexData(code || "610000");
-  createData(cardList, data);
-  createData(cardListMid, data);
-  createData(cardListRight, data);
-};
-onMounted(async () => {
-  await refresh(null);
-});
-const createData = (data, res) => {
-  _.forEach(data.value, (i, key) => {
-    const obj = mappingKeys[i.cardName];
-    const list = res[i.cardName];
-    if (i.circlecharts) {
-      i.chartData = [];
-      const pies = _.keys(obj);
-      _.forEach(pies, (p) => {
-        i.chartData.push({ name: obj[p], value: list[p] || 0 });
-      });
 
-      console.log("440====", i);
-    }
-    _.forEach(i.data, (item) => {
-      const mapkey = _.findKey(obj, (o) => o == item.key);
-      item.value = list[mapkey] || 0;
-    });
-    if (i.slot) {
-      _.forEach(i.slotData, (item) => {
-        const totalName = _.findKey(obj, (o) => o == item.name);
-        item.total = list[totalName] || 0;
-        _.forEach(item.data, (s) => {
-          const mapkey = _.findKey(obj, (o) => o == scrollTo.name);
-          s.total = list[mapkey] || 0;
-          s.rate = item.total ? (s.total / item.total).toFixed(2) : 0;
-        });
-      });
-    }
-  });
-};
+onMounted(async () => {
+  const data = await indexData("610017");
+  console.log("407 home----", data);
+});
 </script>

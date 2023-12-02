@@ -23,19 +23,17 @@ import request from "./request";
 export const getBanner = () => request({ url: "/carousel/getReleaseList" });
 
 // 实例接口
-export const order = () =>
+export const mapCities = () =>
   request({
-    url: "/home/floordata",
+    url: "/data/countyList",
   });
 // 媒体咨询
-export const news = (params) =>
+export const indexData = (code) =>
   request({
-    url: "/article/getReleaseList",
-    params: params,
+    url: `/data/index?quxian=${code}`,
   });
-// 媒体查询详情
-export const newsDetail = (params) =>
+// 媒体查询详情  ?quxian=
+export const lawData = (code) =>
   request({
-    url: "/article/detail",
-    params: params,
+    url: `/data/ggflfw?quxian=${code}`,
   });

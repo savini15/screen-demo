@@ -35,6 +35,28 @@ import * as ElementPlusIconsVue from "@element-plus/icons-vue";
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component);
 }
+// (function(win) {
+// 	var doc = win.document;
+// 	var docEl = doc.documentElement;
+// 	var tid;
+
+// 	function refreshRem() {
+// 		var width = docEl.getBoundingClientRect().width;
+// 		// console.log(width)
+// 		if (width <= 1920) { // 最大宽度
+// 			width = 1800;
+// 		}
+// 		var rem = width / 10;
+// 		docEl.style.fontSize = rem + 'px';
+
+// 	}
+// 	win.addEventListener('resize', function() {
+// 		clearTimeout(tid);
+// 		tid = setTimeout(refreshRem, 10);
+// 	}, false);
+// 	refreshRem();
+// })(window);
+
 //全局注册
 app.use(ElementPlus);
 app.use(route);
