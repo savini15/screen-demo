@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style=" height: 100%;">
     <my-echarts :myOption="options"></my-echarts>
   </div>
 </template>

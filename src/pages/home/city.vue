@@ -24,23 +24,17 @@ const route = useRoute();
 import { cityMap } from "../../../public/public/city/china-main-city-map";
 
 import { watch } from "@vue/runtime-core";
-import { useStore } from "vuex";
-const store = useStore();
-console.log("store-----", store);
-// eslint-disable-next-line no-undef
-const selectArea = computed(() => {
-  //返回的是ref对象
-  return store.state.selectArea;
-});
+import {useStore} from 'vuex' ;
+const store = useStore()
+console.log('store-----', store)
+const selectArea = computed(()=>{
+    //返回的是ref对象
+    return store.state.selectArea;
+})
 
-watch(
-  selectArea,
-  (newVal, oldVal) => {
-    console.log("newVal, oldVal", newVal, oldVal);
-    cancelActive(newVal);
-  },
-  { immediate: false, deep: true }
-);
+watch([selectArea], (newValue, oldValue) => {
+  console.log("区域选择 修改了", newValue, oldValue);
+});
 let state = reactive({
   id: "echarts_" + new Date().getTime() + Math.floor(Math.random() * 1000),
   myChart: null,

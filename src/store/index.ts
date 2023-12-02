@@ -5,7 +5,7 @@ const store = createStore({
   state() {
     return {
       count: "6667777",
-      selectArea: null,
+      selectArea:null
     };
   },
   getters: {
@@ -17,10 +17,10 @@ const store = createStore({
     increment(state) {
       state.count++;
     },
-    selectAreaChange(state, b) {
-      console.log("21----", b);
+    selectAreaChange(state,b){
+      console.log('21----',b)
       state.selectArea = b;
-    },
+    }
   },
   actions: {},
 

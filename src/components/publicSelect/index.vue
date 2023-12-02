@@ -18,15 +18,14 @@
 <script setup>
 import { ref } from "vue";
 import apiRes from "@/utils/apiData/quyu.js";
-import { useStore } from "vuex";
-import * as _ from "lodash";
-const store = useStore();
+import {useStore} from 'vuex' ;
+const store = useStore()
 const value = ref(null);
 const options = apiRes.data;
 let $emit = defineEmits(["optionChange"]);
 const optionChange = () => {
   $emit("optionChange", value.value);
-  store.commit("selectAreaChange", _.find(options, { code: value.value }).name);
+  store.commit('selectAreaChange', '新城区')
 };
 </script>
 

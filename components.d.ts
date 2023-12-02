@@ -8,6 +8,7 @@ declare module '@vue/runtime-core' {
     CircleCharts: typeof import('./src/components/circleCharts/index.vue')['default']
     CountRate: typeof import('./src/components/countRate/index.vue')['default']
     Header: typeof import('./src/components/header/index.vue')['default']
+    'Index copy': typeof import('./src/components/listCard/index copy.vue')['default']
     ListCard: typeof import('./src/components/listCard/index.vue')['default']
     Loading: typeof import('./src/components/MyLoading/loading.vue')['default']
     MyEarth: typeof import('./src/components/MyEarth/index.vue')['default']

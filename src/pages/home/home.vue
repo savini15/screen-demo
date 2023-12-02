@@ -1,24 +1,14 @@
 <template>
   <div class="content_container">
-    <el-row style="height: 70%" align="middle">
+    <!--上部 -->
+    <el-row :gutter="20" type="flex">
       <el-col :span="6">
-        <el-row>
-          <list-card
-            :cardName="item.cardName"
-            :cardData="item.data"
-            :cardbg="item.bk"
-            v-for="(item, index) in cardList"
-            :key="index"
-            :wrap="item.wrap"
-            :propsWidth="item.width"
-          >
+        <el-row style="height:100%">
+          <list-card :cardName="item.cardName" :cardData="item.data" :cardbg="item.bk" v-for="(item, index) in cardList"
+            :key="index" :wrap="item.wrap" :propsWidth="item.width" :props-height="item.height">
             <template v-slot:rate>
               <el-row :gutter="20" style="padding: 10px" v-if="item.rate">
-                <el-col
-                  :span="24 / item.slotNum"
-                  :key="p"
-                  v-for="(i, p) in item.slotData"
-                >
+                <el-col :span="24/item.slotData.length" :key="p" v-for="(i, p) in item.slotData">
                   <count-rate :data="i"></count-rate>
                 </el-col>
               </el-row>
@@ -27,46 +17,31 @@
         </el-row>
       </el-col>
       <el-col :span="12">
-        <el-row align="middle">
-          <el-col :span="24">
-            <public-select @optionChange="optionChange"></public-select>
-            <router-view :codeNo="codeNo"></router-view>
-          </el-col>
-        </el-row>
+            <list-card :cardName="cardMap.cardName" :propsHeight="cardMap.height">
+              <template v-slot:rate>
+                <public-select @optionChange="optionChange"></public-select>
+                <router-view :codeNo="codeNo"></router-view>
+              </template>
+            </list-card>
       </el-col>
-      <el-col :span="6">
-        <div class="count-resource q1">
-          <div class="com-screen-content2">
-            <list-card
-              :cardName="item.cardName"
-              :cardData="item.data"
-              :cardbg="item.bk"
-              v-for="(item, index) in cardListRight"
-              :key="index"
-              :wrap="item.wrap"
-            ></list-card>
+      <el-col :span="6" >   
+          <div class="count-resource q1" style="height:100%">
+            <div class="com-screen-content2" style="height:100%">
+              <list-card style="height:calc(25% - 0.1rem)" :cardName="item.cardName" :cardData="item.data" :cardbg="item.bk"
+                v-for="(item, index) in cardListRight" :key="index" :wrap="item.wrap"></list-card>
+            </div>
           </div>
-        </div>
-      </el-col>
+          </el-col> 
     </el-row>
-    <!-- <el-row style="height: 10%" align="middle"></el-row> -->
-    <el-row style="height: 30%" align="middle">
-      <el-col
-        :span="item.span"
-        v-for="(item, index) in cardListMid"
-        :key="index"
-      >
-        <list-card
-          :cardName="item.cardName"
-          :cardData="item.data"
-          :cardbg="item.bk"
-          :key="index"
-          :wrap="item.wrap"
-        >
+    <!-- 底部 -->
+    <el-row :gutter="20"   type="flex">
+      <el-col :span="item.span" v-for="(item, index) in cardListMid" :key="index">
+        <list-card :cardName="item.cardName" :cardData="item.data" :cardbg="item.bk" :key="index" :wrap="item.wrap" :props-height="item.height">
           <template v-slot:circleCharts>
             <circle-charts v-if="item.circlecharts"></circle-charts>
           </template>
         </list-card>
+        <div style="clear:both"></div>
       </el-col>
     </el-row>
   </div>
@@ -81,9 +56,16 @@ const optionChange = (option) => {
   codeNo.value = option;
 };
 const codeNo = ref(null);
+const cardMap = ref(
+  {
+    cardName: "业务地图",
+    height:"calc(100% - 20px)",
+  }
+)
 const cardList = ref([
   {
     cardName: "行政立法",
+    height:"auto",
     data: [
       {
         icon: "src/assets/images/greenbook.png",
@@ -101,10 +83,11 @@ const cardList = ref([
         value: 1170,
       },
     ],
-    bk: "src/assets/images/xzlf.png",
+
   },
   {
     cardName: "行政复议",
+    height:"auto",
     slot: true,
     slotNum: 2,
     rate: true,
@@ -168,11 +151,12 @@ const cardList = ref([
         type: "progress",
       },
     ],
-    bk: "src/assets/images/xzlf.png",
+
   },
   {
     cardName: "行政执法监督",
     width: "50%",
+    height:"auto",
     rate: true,
     slot: true,
     slotNum: 1,
@@ -198,12 +182,13 @@ const cardList = ref([
         ],
       },
     ],
-    data: [],
-    bk: "src/assets/images/xzzfjd.png",
+    // data: [],
+
   },
   {
     cardName: "行政规范性文件",
     width: "50%",
+    height:"auto",
     slot: true,
     slotData: [],
     rate: true,
@@ -214,7 +199,7 @@ const cardList = ref([
         value: 1170,
       },
     ],
-    bk: "src/assets/images/xzzfjd.png",
+
   },
 ]);
 const cardListRight = ref([
@@ -237,7 +222,7 @@ const cardListRight = ref([
         value: 1170,
       },
     ],
-    bk: "src/assets/images/xzlf.png",
+
   },
   {
     cardName: "律师业务",
@@ -258,7 +243,7 @@ const cardListRight = ref([
         value: 1170,
       },
     ],
-    bk: "src/assets/images/xzlf.png",
+
   },
   {
     cardName: "公证办理",
@@ -279,7 +264,7 @@ const cardListRight = ref([
         value: 1170,
       },
     ],
-    bk: "src/assets/images/xzlf.png",
+
   },
   {
     cardName: "司法鉴定",
@@ -300,34 +285,37 @@ const cardListRight = ref([
         value: 1170,
       },
     ],
-    bk: "src/assets/images/xzlf.png",
+
   },
 ]);
 
 const cardListMid = ref([
   {
     span: 6,
+    height:"calc(100% - .11rem)",
     cardName: "人民调解案件总数",
     slot: true,
     circlecharts: true,
     cardData: [],
-    bk: "src/assets/images/rmjfj.png",
+
   },
   {
     span: 3,
+    height:"calc(100% - .11rem)",
     cardName: "仲裁服务",
     slot: true,
     circlecharts: true,
     cardData: [],
-    bk: "src/assets/images/xzzfjd.png",
+
   },
   {
     span: 3,
+    height:"calc(100% - .11rem)",
     cardName: "法律援助案件",
     slot: true,
     circlecharts: true,
     cardData: [],
-    bk: "src/assets/images/xzzfjd.png",
+
   },
   {
     cardName: "基层工作",
@@ -360,7 +348,7 @@ const cardListMid = ref([
         value: 1170,
       },
     ],
-    bk: "src/assets/images/xzlf.png",
+
   },
   {
     cardName: "社区矫正",
@@ -393,7 +381,7 @@ const cardListMid = ref([
         value: 1170,
       },
     ],
-    bk: "src/assets/images/xzlf.png",
+
   },
 ]);
 </script>
